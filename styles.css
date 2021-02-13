@@ -1,0 +1,273 @@
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    background-color: #FFFFFF;
+    transition: 1s ease-in;
+}
+
+.form-container {
+    text-align: center;
+}
+
+.form-text {
+    font-size: 2.3rem;
+    font-weight: 300;
+}
+
+.form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.channel-id {
+    border: 3px solid #C4302B;
+    border-radius: 1rem;
+    background-color: transparent;
+    padding: .3rem .3rem .3rem .3rem;
+    margin: .3rem .3rem .3rem .3rem;
+    color: #C4302B;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    width: 30rem;
+}
+
+.channel-id:focus {
+    outline: none;
+}
+
+.channel-id-submit {
+    width: 2.8rem;
+    color: #FFFFFF;
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-align: center;
+    background: linear-gradient(150deg, #8e43ff 0%, #0077ff 100%);
+    cursor: pointer;
+    border: none;
+    border-radius: 1.3rem;
+    font-family: "Spoqa Han Sans Neo";
+    padding: .3rem .3rem .3rem .3rem;
+    margin: .3rem .3rem .3rem .3rem;
+}
+
+.channel-id-submit:focus{
+    outline: none;
+}
+
+.header {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    padding: 1rem;
+    margin: .3rem .3rem 3rem .3rem;
+}
+
+.youtube-logo {
+    height: 3.3rem;
+}
+
+.title-text {
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    font-size: 3.3rem;
+    font-weight: 300;
+}
+
+.channel {
+    display: flex;
+    flex-wrap:wrap;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.channel-logo-container {
+    flex: 0 0 auto;
+    width: 50%;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.channel-logo {
+    max-width: 100%;
+    height: auto;
+    border-radius: 40%;
+}
+
+.channel-view-btn {
+    display: inline-block;
+    position: relative;
+    font-size: .875rem;
+    border-radius:.2rem;
+    text-decoration: none;
+    text-align: center;
+    color: #FFFFFF;
+    background-color: #C4302B;
+    user-select: none;
+    cursor: pointer;
+    vertical-align: middle;
+    border: 1px solid #C4302B;
+    border-radius: .25rem;
+    padding: .375rem 3.75rem;
+    margin: 1rem 0 0 0;
+    transition: color .5s ease-in-out, background-color .5s ease-in-out, border-color .5s ease-in-out, box-shadow .5s ease-in-out
+}
+
+.channel-view-btn:hover{
+    color:#C4302B;
+    background-color: #FFFFFF;
+    border-color:#C4302B;
+}
+
+.channel-view-btn:focus{
+    color:#FFFFFF;
+    background-color:#C4302B;
+    border-color:#C4302B;
+}
+
+.channel-view-btn:disabled {
+    color:#fff;
+    background-color:#C4302B;
+    border-color:#C4302B;
+}
+
+.channel-info-container {
+    flex: 0 0 auto;
+    width: 50%;
+    margin-bottom: 1.5rem;
+}
+
+.channel-info-list {
+    display: flex;
+    flex-direction: column;
+    width: 40rem;
+    border-radius: .5rem;
+    padding: 0;
+    box-shadow:0 1rem 3rem rgba(0,0,0,.175);
+}
+
+.channel-info-list-item {
+    position: relative;
+    display: block;
+    padding: .7rem 1.2rem;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+    letter-spacing: .03rem;
+}
+
+.channel-info-list-item:first-child {
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    background-color: #C4302B;
+    color: #FFFFFF;
+}
+
+.channel-info-list-item:last-child {
+    border-bottom-right-radius: inherit;
+    border-bottom-left-radius: inherit;
+}
+
+.videos-title-container {
+    text-align: center;
+}
+
+.videos-title {
+    font-size: 3.3rem;
+    font-weight: 300;
+}
+
+.video-section{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1.2fr));
+    gap: 3rem 1rem;
+    padding: 3rem 0;
+    margin: 0 15rem;
+    border-top: 4px solid #CCC;
+}
+
+.video-section:first-child {
+    border-top: none;
+}
+
+.video-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.thumbnail {
+    position: relative;
+    display: flex;
+}
+
+.thumbnail::before {
+    content: attr(data-duration);
+    position: absolute;
+    background-color: rgba(0, 0, 0, .85);
+    color: white;
+    right: 5px;
+    bottom: 5px;
+    padding: .1em .3em;
+    border-radius: .3em;
+    font-size: .9rem;
+}
+
+.thumbnail-image {
+    width: 100%;
+    height: 100%;
+    min-width: 250px;
+    min-height: 150px;
+    background-color: #AAA;
+}
+
+.video-bottom-section {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 1rem;
+}
+
+.channel-icon {
+    margin-right: .75rem;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    background-color: #AAA;
+}
+
+.video-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.video-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: .5rem;
+    text-decoration: none;
+    color: black;
+}
+
+.video-channel-name {
+    margin-bottom: .1rem;
+    text-decoration: none;
+    transition: color 150ms;
+}
+
+.video-channel-name:hover {
+    color: #111;
+}
+
+.video-channel-name,
+.video-metadata {
+    color: #555;
+}
