@@ -27,7 +27,7 @@ body {
     justify-content: center;
 }
 
-.channel-id {
+.channelId {
     border: 3px solid #C4302B;
     border-radius: 1rem;
     background-color: transparent;
@@ -40,7 +40,7 @@ body {
     width: 30rem;
 }
 
-.channel-id:focus {
+.channelId:focus {
     outline: none;
 }
 
@@ -71,15 +71,28 @@ body {
     margin: .3rem .3rem 3rem .3rem;
 }
 
+header a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.youtube-logo-a {
+    height: 3.3rem;
+}
+
 .youtube-logo {
     height: 3.3rem;
 }
 
-.title-text {
+.youtube-text-a {
     position: absolute;
     margin: 0 auto;
     left: 0;
     right: 0;
+}
+
+.title-text {
+    color: #000000;
     font-size: 3.3rem;
     font-weight: 300;
 }

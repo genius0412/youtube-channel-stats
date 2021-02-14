@@ -5,11 +5,9 @@ const submitButton = document.querySelector('.channel-id-submit')
 const inputChannel = document.querySelector('.channel-id')
 const body = document.querySelector('body')
 
-let channelInfo //document.querySelector('.channel')
-let videoSection    //document.querySelector('.video-section')
-let channelId = "" //UCYjFK1MVsqyVMLncosv5A1w
-
-
+let channelInfo
+let videoSection
+let channelId
 
 const insertAfter = (newNode, referenceNode) => {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
@@ -204,8 +202,8 @@ const showVideo = (data, time, info) => {
     const utcDate = Date.UTC(pDate.years, pDate.months-1, pDate.days, pDate.hours, pDate.minutes, pDate.seconds)
     const curDate = Date.now()
     const diff = (curDate - utcDate)/1000;
-    const pastTime = [diff/31536000, diff/2629746, diff/86400, diff/3600, diff/60, diff]
-    const unitDay = ["year", "month", "day", "hour", "minute", "second"]
+    const pastTime = [diff/31536000, diff/2629746, diff/604800, diff/86400, diff/3600, diff/60, diff]
+    const unitDay = ["year", "month", "week", "day", "hour", "minute", "second"]
     let pastTimeText
     for(let i=0; i<pastTime.length; i++){
         if(pastTime[i] >= 1){
@@ -228,7 +226,19 @@ const showVideo = (data, time, info) => {
     return article
 }
 
+function comp(a, b){
+    const aDate = parseDay(a.items[0].snippet.publishedAt)
+    const bDate = parseDay(b.items[0].snippet.publishedAt)
+    const utcADate = Date.UTC(aDate.years, aDate.months-1, aDate.days, aDate.hours, aDate.minutes, aDate.seconds)
+    const utcBDate = Date.UTC(bDate.years, bDate.months-1, bDate.days, bDate.hours, bDate.minutes, bDate.seconds)
+
+    if(utcADate > utcBDate) return -1;
+    else if(utcADate < utcBDate) return 1;
+    return 0;
+}
+
 const loadVideo = (data, info) => {
+    let videoArray = new Array()
     const playListItems = data.items
 
     if(playListItems){
@@ -239,22 +249,30 @@ const loadVideo = (data, info) => {
             fetch(url)
                 .then(res => res.json())
                 .then(res => {
-                    console.log("Video Information")
-                    console.log(res.items[0])
-
-                    const duration = parseTime(res.items[0].contentDetails.duration)
-                    let time = ""
-                    let hr = String(Number(duration.days)*24 + Number(duration.hours))
-                    if(hr !== "0") time += `${hr}:${formatNumber(duration.minutes)}:`
-                    else time += `${duration.minutes}:`
-                    time += formatNumber(duration.seconds)
-
-                    const obj = showVideo(res.items[0], time, info)
-
-                    if(!videoSection.childElementCount) videoSection.appendChild(obj)
-                    else insertAfter(obj, videoSection.lastElementChild)
+                    videoArray.push(res)
                 })
         })
+
+        setTimeout(() => {
+            videoArray.sort(comp)
+
+            videoArray.forEach(res => {
+                console.log("Video Information")
+                console.log(res.items[0])
+    
+                const duration = parseTime(res.items[0].contentDetails.duration)
+                let time = ""
+                let hr = String(Number(duration.days)*24 + Number(duration.hours))
+                if(hr !== "0") time += `${hr}:${formatNumber(duration.minutes)}:`
+                else time += `${duration.minutes}:`
+                time += formatNumber(duration.seconds)
+    
+                const obj = showVideo(res.items[0], time, info)
+    
+                if(!videoSection.childElementCount) videoSection.appendChild(obj)
+                else insertAfter(obj, videoSection.lastElementChild)
+            })
+        }, 800)
     }
 }
 
@@ -268,6 +286,8 @@ const showPlaylist = (playlistId, info) => {
 }
 
 const youtubeChannelStats = () => {
+    formContainer.remove()
+
     channelInfo = document.createElement('div')
     channelInfo.classList.add('channel')
     insertAfter(channelInfo, body.lastElementChild)
@@ -306,19 +326,15 @@ const youtubeChannelStats = () => {
         })
 }
 
-submitButton.addEventListener('click', function(event){
-    event.preventDefault()
-    channelId = String(document.querySelector('.channel-id').value);
-    formContainer.remove()
+const locationURL =  location.href
 
-    youtubeChannelStats()
-}, { once: true })
+const lc = locationURL.indexOf("?")
+if(lc != -1){
+    const varList = locationURL.substring(lc+1).split("&")
+    varList.forEach(item => {
+        const l = item.split("=")
+        eval(`${l[0]} = "${l[1]}"`)
+    })
+}
 
-inputChannel.addEventListener("keyup", function(event) {
-    console.log("input text")
-    if (event.keyCode === 13) {
-        console.log("input enter")
-        event.preventDefault();
-        submitButton.click()
-    }
-});
+if(channelId !== undefined) youtubeChannelStats()

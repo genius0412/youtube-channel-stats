@@ -10,17 +10,19 @@
 </head>
 <body>
     <header class="header">
-        <a href="#">
+        <a href="index.html" class="youtube-logo-a">
             <img src="logo.svg" alt="Youtube Logo" class="youtube-logo" />
         </a>
-        <h1 class="title-text">YouTube Channel Stats</h1>
+        <a href="index.html" class="youtube-text-a">
+            <h1 class="title-text">YouTube Channel Stats</h1>
+        </a>
     </header>
 
     <div class="form-container">
         <h1 class="form-text">Input Youtube Channel ID</h1>
-        <form class="form" onsubmit="return false">
-            <input type="text" name="channel-id" class="channel-id"/>
-            <button type="button" class="channel-id-submit">&#xE001</button>
+        <form class="form">
+            <input type="text" name="channelId" class="channelId"/>
+            <button type="submit" class="channel-id-submit">&#xE001</button>
         </form>
     </div>
     <script src="index.js"></script>
