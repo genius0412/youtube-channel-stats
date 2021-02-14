@@ -89,12 +89,17 @@ header a {
     margin: 0 auto;
     left: 0;
     right: 0;
+    width: fit-content;
+    height: fit-content;
 }
 
 .title-text {
     color: #000000;
     font-size: 3.3rem;
     font-weight: 300;
+    margin: 0;
+    width: fit-content;
+    height: fit-content;
 }
 
 .channel {
